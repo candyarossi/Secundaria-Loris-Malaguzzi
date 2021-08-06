@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "Playing-with-Java_f42a2ca6",
+            "console": "externalTerminal"
+        },
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "Playing-with-Java_9b2c1256",
+            "console": "externalTerminal"
+        }
+    ]
+}
