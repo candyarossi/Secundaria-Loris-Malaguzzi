@@ -1,0 +1,158 @@
+@charset "utf-8";
+/* CSS Document */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,400;0,700;1,100;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
+
+
+*{ 
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    border: none;
+    outline: none;
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
+    background-color: #F2F4F4;
+    display: block;
+}
+
+header{
+    border: 1px solid lightgrey;
+    background-color: white;
+    width: 1060px;
+    padding: 20px;
+    clear: both;
+}
+
+section{
+    border: 1px solid lightgrey;
+    background-color: white;
+    width: 1100px;
+    height: fit-content;
+}
+
+article{
+    border: 1px solid lightgrey;
+    background-color: white;
+    width: 786px;
+    float: right;
+    padding: 20px;
+}
+
+aside{
+    border: 1px solid lightgrey;
+    background-color: white;
+    width: 230px;
+    float: left;
+    padding: 20px;
+}
+
+footer{
+    border: 1px solid lightgrey;
+    background-color: white;
+    width: 1100px;
+    text-align: center;
+    clear: both;
+}
+
+h1, h2, h3, h4, h5, h6, caption, th{
+    color: black;
+    font-weight: 700;
+}
+
+p, td, li, dt, dd, small{
+    color: #525252;
+}
+
+a{
+    color: #0645ad;
+    text-decoration: none;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+img, video, audio, iframe{
+    max-height: 190px;
+    max-width: 280px;
+    display: block;
+    margin-bottom: 5px; 
+}
+
+table{
+    padding: 4px;
+    border: 1px solid lightgrey;
+    margin-left: 30px;
+    margin-bottom: 20px;
+}
+
+th{
+    background-color: lightgrey;
+}
+
+td{
+    background-color: #F2F4F4;
+}
+
+th, td, small{
+    padding: 10px;
+}
+
+h1, h2, h3, h4, h5, h6, p, ul, ol{
+    padding: 15px 25px 15px 25px;
+}
+
+li{
+    margin-left: 20px;
+}
+
+p, li{
+    font-size: 14px;
+    line-height: 24px;
+}
+
+
+#main{
+    width: 1100px;
+    margin: 10px auto;
+}
+
+#img-header{
+    max-height: 120px;
+    max-width: 120px;
+    float: none;
+    display: inline;
+}
+
+#h1-header{
+    display: inline;
+    font-size: 36px;
+    color: #AF7AC5;
+}
+
+#logo{
+    margin: 30px;
+    max-width: 170px;
+}
+
+#issy{
+    font-family: 'Kaushan Script', cursive;
+    font-size: 60px;
+    color: #8E44AD;
+}
+
+
+.media{
+    background-color: #F2F4F4;
+    padding: 4px;
+    border: 1px solid lightgrey;
+    display: inline;
+    float: right;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}

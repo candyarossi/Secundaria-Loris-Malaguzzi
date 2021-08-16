@@ -1,0 +1,11 @@
+nombreEtiqueta {
+    font-family: 'Roboto' sans-serif;  /* Nombre y tipo de fuente */
+    font-size: 12px;
+    font-style: normal;  /* También puede ser: italic */
+    font-weight: normal;  /* También puede ser: bold */
+    color: black;  /* También puede ser: rgb(0,0,0) ó #000 */
+    text-align: left;  /* También puede ser: right, center ó justify */
+    text-decoration: none;  /* También puede ser: underline ó line-through */
+    text-transform: uppercase;  /* También puede ser: lowercase ó capitalize */
+    line-height: 14px;
+}

@@ -1,0 +1,27 @@
+nombreEtiqueta {
+    background-attachment: scroll;  /* También puede ser: fixed */
+    background-color: black;  /* También puede ser: rgb(0,0,0) ó #000 */
+    background-image: url('#');
+    background-position: top left;
+    /* Combinaciones: 
+        - top left
+        - top center
+        - top right
+        - center left
+        - center center
+        - center right
+        - bottom left
+        - bottom center
+        - bottom right
+    */
+    background-repeat: repeat-x; 
+    /* Puede ser:
+        - repeat-x
+        - repeat-y
+        - repeat
+        - space
+        - round
+        - no-repeat
+        - space repeat
+    */
+}

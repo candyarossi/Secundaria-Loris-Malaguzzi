@@ -1,3 +1,4 @@
+-- CALCULAR ALGORITMO
 -- Averigar cuantas veces es necesario multiplicar el número 2 por 2 
 -- Para llegar al resultado 4096, es decir, 2 elevado a qué número 
 -- Nos va a dar como resultado 4096 (logaritmo), utilizando WHILE o REPEAT
@@ -26,3 +27,7 @@ while resultado2 ~= numero do
 	print("\n Resultado WHILE: ", resultado2)
 	print("Veces que se repite el ciclo: ", contador2)
 end
+
+
+-- Cómo se hace:
+print(math.log(4096, 2))

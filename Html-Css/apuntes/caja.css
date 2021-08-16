@@ -1,0 +1,15 @@
+nombreEtiqueta {  /* Los valores también pueden estar dados en % */
+    margin: 10px 11px 12px 13px;
+    margin-top: 10px;
+    margin-right: 11px;
+    margin-bottom: 12px;
+    margin-left: 13px;
+
+    padding: 10px 11px 12px 13px;
+    padding-top: 10px;
+    padding-right: 11px;
+    padding-bottom: 12px;
+    padding-left: 13px;
+
+    border: 1px solid black;
+}
