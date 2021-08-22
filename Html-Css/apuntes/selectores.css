@@ -1,0 +1,16 @@
+/* EJEMPLOS DE SELECTORES */
+
+/* Selector de etiqueta */
+body {
+    color: white;
+}
+
+/* Selector de ID */
+#main {
+    color: white;
+}
+
+/* Selector de CLASS */
+.media{
+    color: white;
+}

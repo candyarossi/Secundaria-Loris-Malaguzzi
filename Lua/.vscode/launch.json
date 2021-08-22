@@ -6,7 +6,7 @@
             "type": "lua",
             "request": "launch",
             "stopOnEntry": true,
-            "program": "${workspaceFolder}/src/main.lua",
+            "program": "${workspaceFolder}/src/ejercicios/main.lua",
             "console": "externalTerminal",
             "outputCapture": []
         }
