@@ -10,7 +10,8 @@ function MostrarLista(lista)
     end
 end
 
---1.	Hacer una función que permita ingresar varios elementos a una lista, tantos como quiera el usuario.
+--1.	Hacer una función que permita ingresar varios elementos a una lista, 
+--      tantos como quiera el usuario.
 
 function IngresarElementosALista()
     local rta = "si"
@@ -44,7 +45,8 @@ MostrarLista(lista)
 print("Lista 2:")
 MostrarLista(lista2)
 
---3.	Hacer una función que encuentre el menor elemento de una lista y lo retorne.
+--3.	Hacer una función que encuentre el menor elemento de una lista 
+--      y lo retorne.
 
 function DevolverMenorDeUnaLista(lista)
     local menor = lista[1]
@@ -58,7 +60,8 @@ end
 
 print("Menor elemento de la lista: ", DevolverMenorDeUnaLista(lista))
 
---4.	Hacer una función que inserte en una lista ordenada un nuevo elemento, conservando el orden de esta.
+--4.	Hacer una función que inserte en una lista ordenada un nuevo elemento, 
+--      conservando el orden de esta.
 
 table.sort(lista)
 print("Lista anterior ordenada:")
@@ -75,7 +78,8 @@ print("Elemento insertado: ", nuevo)
 print("Lista nueva ordenada:")
 MostrarLista(lista)
 
---5.	Hacer una función que sume todos los elementos de una lista, sin alterar su contenido, y retorne su resultado.
+--5.	Hacer una función que sume todos los elementos de una lista, 
+--      sin alterar su contenido, y retorne su resultado.
 
 function SumarElementosDeUnaLista(lista)
     local resultado = 0
@@ -87,7 +91,9 @@ end
  
 print("Suma de todos los elementos de la lista: ", SumarElementosDeUnaLista(lista))
 
---6.	Hacer una función que calcule el promedio de los elementos de una lista, para ello se puede usar la función del punto 5 y agregar la división por la cantidad de elementos de la lista.
+--6.	Hacer una función que calcule el promedio de los elementos de una lista, 
+--      para ello se puede usar la función del punto 5 y agregar la división por 
+--      la cantidad de elementos de la lista.
 
 -- V1
 function PromedioDeLosElementosDeUnaLista(lista)
@@ -109,7 +115,9 @@ end
 
 print("Promedio de todos los elementos de la lista: ", PromedioDeLosElementosDeUnaLista(lista))
 
---7.	Hacer una función que reciba una lista con números de un solo dígito y que transforme esos dígitos en un número decimal. Por ejemplo, la lista:
+--7.	Hacer una función que reciba una lista con números de un solo dígito 
+--      y que transforme esos dígitos en un número decimal. Por ejemplo, la lista:
+--
 --      local lista = {1,5,9,3,6,8}
 --      Resultado de la función: 159368
 

@@ -41,14 +41,13 @@ public class DeezerApi {
 		
 		for(Integer aux : idsCanciones) {
 			try {
-				String infoCancion = this.getSongInfo(aux);
-				
-				Cancion nuevaCancion = this.getSong(infoCancion);
+				Cancion nuevaCancion = this.getSongInfo(aux);
 				
 				canciones.add(nuevaCancion);
 				
 			} catch (Exception e) {
-				//e.printStackTrace();
+				e.getMessage();
+				e.printStackTrace();
 			}
 		}
 		
@@ -57,13 +56,14 @@ public class DeezerApi {
 
 
 	
-	public String getSongInfo(Integer songId) throws Exception {
+	public Cancion getSongInfo(Integer songId) throws Exception {
 		
 		StringBuilder resultado = new StringBuilder();
+		
+		Cancion nuevaCancion = new Cancion();
 	    
 		URL url = new URL(this.getUrl_base() + "track/" + songId);
 
-		
 		HttpURLConnection conexion = (HttpURLConnection) url.openConnection();
 		conexion.setRequestMethod("GET");
 		
@@ -77,7 +77,9 @@ public class DeezerApi {
 		
 		rd.close();
 		
-		return resultado.toString();
+		nuevaCancion = this.getSong(resultado.toString());
+		
+		return nuevaCancion;
 	}
 	
 	
@@ -98,9 +100,12 @@ public class DeezerApi {
 			try {
 				nuevaCancion.setPreview(new URL(jobj.getString("preview")));
 			} catch (MalformedURLException e) {
+				//e.getMessage();
+				//e.printStackTrace();
 				try {
 					nuevaCancion.setPreview(new URL("https://www.deezer.com/mx/"));
 				} catch (MalformedURLException e1) {
+					e1.getMessage();
 					e1.printStackTrace();
 				}
 			}
@@ -112,7 +117,8 @@ public class DeezerApi {
 			nuevaCancion.setAlbum(album.getString("title"));
 			
 		} catch (JSONException e) {
-			//e.printStackTrace();
+			e.getMessage();
+			e.printStackTrace();
 		}
 		
 		return nuevaCancion;

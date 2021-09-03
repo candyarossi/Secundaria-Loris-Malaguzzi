@@ -1,5 +1,12 @@
 package Sistemas;
 
+import java.util.ArrayList;
+import Apis.DeezerApi;
+import Apis.IGdbApi;
+import Apis.TMdbApi;
+import Objetos.Cancion;
+import Objetos.Pelicula;
+import Objetos.Videojuego;
 import Users.User;
 import Users.UserList;
 
@@ -7,10 +14,17 @@ import Users.UserList;
 public class IssyApp {
 
 	private UserList usuarios;
+	private ArrayList<String> favGames;
+	private ArrayList<Integer> favFilms;
+	private ArrayList<Integer> favSongs;
+	
 	
 	public IssyApp() {
 		super();
 		this.usuarios = new UserList();
+		this.favGames = new ArrayList<String>();
+		this.favFilms = new ArrayList<Integer>();
+		this.favSongs = new ArrayList<Integer>();
 	}
 	
 	public User login(String email, String pass) {
@@ -44,7 +58,7 @@ public class IssyApp {
 		return userLog;
 	}
 	
-	public void menu(int num) {
+	public void menu(int num, User usuario) {
 		switch(num) {
 			case 1:
 				SistemaJuegos sistJuegos = new SistemaJuegos();
@@ -58,6 +72,108 @@ public class IssyApp {
 				SistemaMusica sistCanciones = new SistemaMusica();
 				sistCanciones.mostrarCanciones();
 				break;
+			case 4: 
+				System.out.println("2");
+				this.mostrarFavs(usuario);
+				break;
 		}
 	}
+	
+	public boolean agregarAFav(int op, Object obj, User usuario) {
+		boolean agregado = false;
+		
+		switch(op) {
+			case 1:
+				agregado = usuario.addFavJuegos((String) obj);
+				break;
+			case 2:
+				agregado = usuario.addFavPelis((int) obj);
+				break;
+			case 3:
+				agregado = usuario.addFavCancion((int) obj);
+				break;
+		}
+		
+		return agregado;
+	}
+	
+	public void mostrarFavs(User usuario) {
+		
+		this.favGames = usuario.getFavGames();
+		this.favFilms = usuario.getFavFilms();
+		this.favSongs = usuario.getFavSongs();
+		
+		for(int i=0; i<this.favSongs.size(); i++) {
+			System.out.println("Fav: " + this.favSongs.get(i));
+		}
+		
+		System.out.println("3");
+		this.mostrarJuegosFav();  //OK 
+		System.out.println("4");
+		this.mostrarPelisFav();  //Ex, GENRES
+		System.out.println("5");
+		this.mostrarCancionFav();  //OK
+		System.out.println("6");
+	}
+	
+	public void mostrarJuegosFav() {
+		
+		if(this.favGames.size() > 0) {
+			for(String aux : this.favGames) {
+				IGdbApi igdb = new IGdbApi();
+				Videojuego juego = new Videojuego();
+				
+				System.out.println("Juego: " + aux);
+				
+				try {
+					juego = igdb.getGameInfoId(aux);
+				} catch (Exception e) {
+					e.getMessage();
+					e.printStackTrace();
+				}
+				System.out.println(juego.toString());
+			}
+		}
+	}
+	
+	public void mostrarPelisFav() {
+		
+		if(this.favFilms.size() > 0) {
+			for(Integer aux : this.favFilms) {
+				TMdbApi tmdb = new TMdbApi();
+				Pelicula peli = new Pelicula();
+				
+				System.out.println("Pelicula: " + aux);
+				
+				try {
+					peli = tmdb.getFilmInfoId(aux, 0);
+				} catch (Exception e) {
+					e.getMessage();
+					e.printStackTrace();
+				}
+				System.out.println(peli.toString());
+			}
+		}
+	}
+
+	public void mostrarCancionFav() {
+	
+		if(this.favSongs.size() > 0) {
+			for(Integer aux : this.favSongs) {
+				DeezerApi deezer = new DeezerApi();
+				Cancion cancion = new Cancion();
+				
+				System.out.println("Cancion: " + aux);
+				
+				try {
+					cancion = deezer.getSongInfo(aux);
+				} catch (Exception e) {
+					e.getMessage();
+					e.printStackTrace();
+				}
+				System.out.println(cancion.toString());
+			}
+		}
+	}
+
 }

@@ -61,7 +61,7 @@ public class TMdbApi {
 		ArrayList<Pelicula> peliculas = new ArrayList<Pelicula>();
 		
 		try {
-			String strPeliculas = this.getInfo("movie/now_playing", 1);
+			String strPeliculas = this.getFilmInfo("movie/now_playing", 1);
 			
 			JSONObject jobj = new JSONObject(strPeliculas);
 			
@@ -75,7 +75,8 @@ public class TMdbApi {
 			}
 				
 		} catch (Exception e) {
-				e.printStackTrace();
+			e.getMessage();
+			e.printStackTrace();
 		}
 		
 		return peliculas;
@@ -83,7 +84,7 @@ public class TMdbApi {
 
 
 	
-	public String getInfo(String query, int page) throws Exception {
+	public String getFilmInfo(String query, int page) throws Exception {
 		
 		StringBuilder resultado = new StringBuilder();
 		
@@ -129,7 +130,7 @@ public class TMdbApi {
 			
 			try {
 				
-				JSONObject objGenresArray = new JSONObject(this.getInfo("genre/movie/list", 0));
+				JSONObject objGenresArray = new JSONObject(this.getFilmInfo("genre/movie/list", 0));
 				
 				JSONArray arrayGenresApi = objGenresArray.getJSONArray("genres");
 				
@@ -152,12 +153,50 @@ public class TMdbApi {
 				nuevaPelicula.setGenres(generos);
 				
 			} catch (Exception e) {
+				e.getMessage();
 				e.printStackTrace();
 			}
 			
 		} catch (JSONException e) {
-			//e.printStackTrace();
+			e.getMessage();
+			e.printStackTrace();
 		}
+		
+		return nuevaPelicula;
+	}
+	
+	
+	
+	public Pelicula getFilmInfoId(int id, int page) throws Exception {
+		
+		StringBuilder resultado = new StringBuilder();
+		
+		Pelicula nuevaPelicula = new Pelicula();
+		
+		URL url;
+		
+		if(page == 0) {
+			url = new URL(this.getUrl_base() + "movie/" + id + "?api_key=" + this.getClave_V3() + "&language=es");
+		}else {
+			url = new URL(this.getUrl_base() + "movie/" + id + "?api_key=" + this.getClave_V3() + "&language=es&page=" + page);
+		}
+		
+		HttpURLConnection conexion = (HttpURLConnection) url.openConnection();
+		conexion.setRequestMethod("GET");
+		
+		BufferedReader rd = new BufferedReader(new InputStreamReader(conexion.getInputStream(), "UTF-8"));
+	
+		String linea;
+		
+		while ((linea = rd.readLine()) != null) {
+			resultado.append(linea);
+		}
+		
+		rd.close();
+		
+		System.out.println("Resultado: " + resultado);
+		
+		nuevaPelicula = this.getFilm(new JSONObject(resultado.toString()));
 		
 		return nuevaPelicula;
 	}

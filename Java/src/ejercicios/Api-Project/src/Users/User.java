@@ -1,5 +1,6 @@
 package Users;
 
+import java.util.ArrayList;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -10,6 +11,9 @@ public class User {
 	private String surname;
 	private String email;
 	private String password;
+	private ArrayList<String> favGames;
+	private ArrayList<Integer> favFilms;
+	private ArrayList<Integer> favSongs;
 	
 	
 	public User() {
@@ -18,15 +22,21 @@ public class User {
 		this.surname = "";
 		this.email = "";
 		this.password = "";
+		this.favGames = new ArrayList<String>();
+		this.favFilms = new ArrayList<Integer>();
+		this.favSongs = new ArrayList<Integer>();
 	}
 
 	
-	public User(String name, String surname, String email, String password) {
+	public User(String name, String surname, String email, String password, ArrayList<String> favGames, ArrayList<Integer> favFilms, ArrayList<Integer> favSongs) {
 		super();
 		this.name = name;
 		this.surname = surname;
 		this.email = email;
 		this.password = password;
+		this.favGames = favGames;
+		this.favFilms = favFilms;
+		this.favSongs = favSongs;
 	}
 
 	
@@ -123,5 +133,43 @@ public class User {
 		}
 	}
 	
+	public boolean addFavJuegos(String gameName) {
+		boolean agregado = favGames.add(gameName);
+		return agregado;
+	}
+	
+	public boolean addFavPelis(int id) {
+		boolean agregado = favFilms.add(385128);
+		return agregado;
+	}
+	
+	public boolean addFavCancion(int id) {
+		boolean agregado = favSongs.add(id);
+		return agregado;
+	}
+
+	public ArrayList<String> getFavGames() {
+		return favGames;
+	}
+
+	public void setFavGames(ArrayList<String> favGames) {
+		this.favGames = favGames;
+	}
+
+	public ArrayList<Integer> getFavFilms() {
+		return favFilms;
+	}
+
+	public void setFavFilms(ArrayList<Integer> favFilms) {
+		this.favFilms = favFilms;
+	}
+
+	public ArrayList<Integer> getFavSongs() {
+		return favSongs;
+	}
+
+	public void setFavSongs(ArrayList<Integer> favSongs) {
+		this.favSongs = favSongs;
+	}
 	
 }

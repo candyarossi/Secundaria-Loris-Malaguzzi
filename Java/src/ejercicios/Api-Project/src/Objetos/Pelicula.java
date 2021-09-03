@@ -58,7 +58,18 @@ public class Pelicula {
 	}
 
 	public void setOriginal_language(String original_language) {
-		this.original_language = original_language;
+		
+		switch(original_language) {
+			case "en":
+				this.original_language = "Inglés";
+				break;
+			case "es":
+				this.original_language = "Español";
+				break;
+			default:
+				this.original_language = "Other";
+				break;
+		}
 	}
 
 	public String getPoster_path() {

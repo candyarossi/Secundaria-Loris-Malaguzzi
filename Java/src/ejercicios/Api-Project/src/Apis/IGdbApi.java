@@ -123,24 +123,18 @@ public class IGdbApi {
 	
 	public ArrayList<Videojuego> get10Games(String[] nombresJuegos) {
 		
-		StringBuilder strFields = new StringBuilder();
 		ArrayList<Videojuego> juegos = new ArrayList<Videojuego>();
-		
-		for(String aux : this.fields) {
-			strFields.append(aux + ",");
-		}
-		
-		strFields.deleteCharAt(strFields.length()-1);
 		
 		for(String aux2 : nombresJuegos) {
 			try {
-				String infoJuego = this.getGameInfo(strFields.toString(), aux2);
+				String infoJuego = this.getGameInfo(aux2);
 				
 				Videojuego nuevoJuego = this.getVideoGame(infoJuego);
 				
 				juegos.add(nuevoJuego);
 				
 			} catch (Exception e) {
+				e.getMessage();
 				e.printStackTrace();
 			}
 		}
@@ -150,11 +144,16 @@ public class IGdbApi {
 
 	
 	
-	public String getGameInfo(String fields, String gameName) throws Exception {
+	public String getGameInfo(String gameName) throws Exception {
+		
+		String strFields = this.concatFields();
 		
 		StringBuilder resultado = new StringBuilder();
 		
-		URL url = new URL(this.getUrl_base() + "games/?fields="+fields+"&search="+gameName);
+		// Los espacios se deben escribir como "%20"
+		gameName = gameName.replace(" ", "%20");
+		
+		URL url = new URL(this.getUrl_base() + "games/?fields="+strFields+"&search="+gameName);
 		
 		HttpURLConnection conexion = (HttpURLConnection) url.openConnection();
 		conexion.setRequestMethod("POST");
@@ -255,10 +254,63 @@ public class IGdbApi {
 			nuevoJuego.setPlatforms(plataformas);
 			
 		} catch (JSONException e) {
+			e.getMessage();
 			e.printStackTrace();
 		}
 		
 		return nuevoJuego;
+	}
+	
+	
+	
+	public Videojuego getGameInfoId(String gameName) throws Exception {
+		
+		String strFields = this.concatFields();
+		
+		gameName = gameName.replace(" ", "%20");
+		
+		StringBuilder resultado = new StringBuilder();
+		
+		Videojuego nuevoJuego = new Videojuego();
+		
+		URL url = new URL(this.getUrl_base() + "games/?fields="+strFields+"&search="+gameName);
+		
+		HttpURLConnection conexion = (HttpURLConnection) url.openConnection();
+		conexion.setRequestMethod("POST");
+		conexion.addRequestProperty("Client-ID", this.getClient_id());
+		conexion.addRequestProperty("Authorization", this.getAuthorization());
+		conexion.addRequestProperty("User-Agent", this.getUser_agent());
+		
+		BufferedReader rd = new BufferedReader(new InputStreamReader(conexion.getInputStream(), "UTF-8"));
+	
+		String linea;
+		
+		while ((linea = rd.readLine()) != null) {
+			resultado.append(linea);
+		}
+		
+		rd.close();
+		
+		System.out.println("Resultado: " + resultado);
+		
+		nuevoJuego = this.getVideoGame(resultado.toString());
+		
+		return nuevoJuego;
+	}
+	
+	
+	
+	public String concatFields() {
+		
+		StringBuilder strFields = new StringBuilder();
+		
+		for(String aux : this.fields) {
+			strFields.append(aux + ",");
+		}
+		
+		strFields.deleteCharAt(strFields.length()-1);
+		
+		return strFields.toString();
 	}
 	
 }
