@@ -1,1 +1,1 @@
-[{"name":"Admin","surname":"Admin","email":"admin@admin.com","password":"123456"},{"name":"Candela","surname":"Yarossi","email":"candyarossi@admin.com","password":"123456"}]
+[{"films":[],"password":"123456","surname":"Admin","songs":[],"name":"Admin","games":[],"email":"admin@admin.com"},{"films":[566525],"password":"123456","surname":"Yarossi","songs":[4594887],"name":"Candela","games":["Outlast"],"email":"candyarossi@admin.com"}]

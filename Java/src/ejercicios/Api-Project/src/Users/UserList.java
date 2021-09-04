@@ -15,11 +15,10 @@ public class UserList {
 		super();
 		this.listado = UserList.LeerArchivo();
 	}
-	
+	 
 	public static ArrayList<User> LeerArchivo(){
 		
 		ArrayList<User> listado = new ArrayList<User>();
-		
 		String strJson = JsonUtiles.leer();
 		
 		try {
@@ -29,9 +28,7 @@ public class UserList {
 			for(int i=0; i<jarray.length(); i++) {
 				
 				JSONObject jobj = (JSONObject) jarray.get(i);
-				
 				User newUser = User.fromJSON(jobj);
-				
 				listado.add(newUser);
 			}
 			
@@ -43,9 +40,23 @@ public class UserList {
 		return listado;
 	}
 	
+	public static void GuardarArchivo(UserList listado) {
+		
+		JSONArray jarray = new JSONArray();
+		
+		for(int i=0; i<listado.contar(); i++) {
+			
+			JSONObject jobj = User.toJSON(new User(listado.obtener(i)));
+			jarray.put(jobj);
+		}
+		
+		JsonUtiles.grabar(jarray);
+	}
+	
 	public int contar() {
 		return this.listado.size();
 	}
+	
 	public User obtener(int pos) {
 		return this.listado.get(pos);
 	}
@@ -53,22 +64,7 @@ public class UserList {
 	
 	public boolean agregarUser(User user) {
 		
-		boolean flag = false;
-		
-		return flag;
-	}
-
-	public boolean eliminarUser(User user) {
-		
-		boolean flag = false;
-		
-		return flag;
-	}
-
-	public boolean editarUser(User user) {
-	
-		boolean flag = false;
-		
+		boolean flag = listado.add(user);
 		return flag;
 	}
 	

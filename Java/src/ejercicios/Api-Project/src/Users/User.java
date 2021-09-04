@@ -1,6 +1,7 @@
 package Users;
 
 import java.util.ArrayList;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -28,17 +29,29 @@ public class User {
 	}
 
 	
-	public User(String name, String surname, String email, String password, ArrayList<String> favGames, ArrayList<Integer> favFilms, ArrayList<Integer> favSongs) {
+	public User(String name, String surname, String email, String password) {
 		super();
 		this.name = name;
 		this.surname = surname;
 		this.email = email;
 		this.password = password;
-		this.favGames = favGames;
-		this.favFilms = favFilms;
-		this.favSongs = favSongs;
+		this.favGames = new ArrayList<String>();
+		this.favFilms = new ArrayList<Integer>();
+		this.favSongs = new ArrayList<Integer>();
 	}
 
+	
+	public User(User user) {
+		super();
+		this.name = user.getName();
+		this.surname = user.getSurname();
+		this.email = user.getEmail();
+		this.password = user.getPassword();
+		this.favGames = user.getFavGames();
+		this.favFilms = user.getFavFilms();
+		this.favSongs = user.getFavSongs();
+	}
+	
 	
 	public String getName() {
 		return name;
@@ -82,6 +95,9 @@ public class User {
 			jobj.put("surname", user.getSurname());
 			jobj.put("email", user.getEmail());
 			jobj.put("password", user.getPassword());
+			jobj.put("games", new JSONArray(user.getFavGames()));
+			jobj.put("films", new JSONArray(user.getFavFilms()));
+			jobj.put("songs", new JSONArray(user.getFavSongs()));
 			
 		} catch (JSONException e) {
 			e.getMessage();
@@ -102,6 +118,25 @@ public class User {
 			user.setEmail(jobj.getString("email"));
 			user.setPassword(jobj.getString("password"));
 			
+			JSONArray jgames = jobj.getJSONArray("games");
+			JSONArray jfilms = jobj.getJSONArray("films");
+			JSONArray jsongs = jobj.getJSONArray("songs");
+			
+			for(int i=0; i<jgames.length(); i++) {
+				String juego = jgames.getString(i);
+				user.addFavJuegos(juego);
+			}
+			
+			for(int i=0; i<jfilms.length(); i++) {
+				int pelicula = jfilms.getInt(i);	
+				user.addFavPelis(pelicula);
+			}
+			
+			for(int i=0; i<jsongs.length(); i++) {
+				int cancion = jsongs.getInt(i);
+				user.addFavCancion(cancion);
+			}
+
 		} catch (JSONException e) {
 			e.getMessage();
 			e.printStackTrace();
@@ -139,7 +174,7 @@ public class User {
 	}
 	
 	public boolean addFavPelis(int id) {
-		boolean agregado = favFilms.add(385128);
+		boolean agregado = favFilms.add(id);
 		return agregado;
 	}
 	

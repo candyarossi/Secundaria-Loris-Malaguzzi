@@ -27,6 +27,15 @@ public class IssyApp {
 		this.favSongs = new ArrayList<Integer>();
 	}
 	
+	public boolean signin(String name, String surname, String email, String password){
+		
+		User usuario = new User(name, surname, email, password);
+		boolean flag = usuarios.agregarUser(usuario);
+		UserList.GuardarArchivo(usuarios);
+		
+		return flag;
+	}
+	
 	public User login(String email, String pass) {
 		
 		boolean flag = false;
@@ -42,7 +51,7 @@ public class IssyApp {
 				pos = i;
 			}
 		}
-		
+		 
 		if(flag) {
 			userLog = usuarios.obtener(pos);
 			
@@ -55,7 +64,7 @@ public class IssyApp {
 			userLog = null;
 		}
 		
-		return userLog;
+		return userLog; 
 	}
 	
 	public void menu(int num, User usuario) {
@@ -73,8 +82,10 @@ public class IssyApp {
 				sistCanciones.mostrarCanciones();
 				break;
 			case 4: 
-				System.out.println("2");
 				this.mostrarFavs(usuario);
+				break;
+			case 5:
+				UserList.GuardarArchivo(usuarios);
 				break;
 		}
 	}
@@ -93,7 +104,7 @@ public class IssyApp {
 				agregado = usuario.addFavCancion((int) obj);
 				break;
 		}
-		
+		 
 		return agregado;
 	}
 	
@@ -103,27 +114,17 @@ public class IssyApp {
 		this.favFilms = usuario.getFavFilms();
 		this.favSongs = usuario.getFavSongs();
 		
-		for(int i=0; i<this.favSongs.size(); i++) {
-			System.out.println("Fav: " + this.favSongs.get(i));
-		}
-		
-		System.out.println("3");
-		this.mostrarJuegosFav();  //OK 
-		System.out.println("4");
-		this.mostrarPelisFav();  //Ex, GENRES
-		System.out.println("5");
-		this.mostrarCancionFav();  //OK
-		System.out.println("6");
+		this.mostrarJuegosFav();  
+		this.mostrarPelisFav();  
+		this.mostrarCancionFav();  
 	}
 	
-	public void mostrarJuegosFav() {
+	public void mostrarJuegosFav() { 
 		
 		if(this.favGames.size() > 0) {
 			for(String aux : this.favGames) {
 				IGdbApi igdb = new IGdbApi();
 				Videojuego juego = new Videojuego();
-				
-				System.out.println("Juego: " + aux);
 				
 				try {
 					juego = igdb.getGameInfoId(aux);
@@ -142,8 +143,6 @@ public class IssyApp {
 			for(Integer aux : this.favFilms) {
 				TMdbApi tmdb = new TMdbApi();
 				Pelicula peli = new Pelicula();
-				
-				System.out.println("Pelicula: " + aux);
 				
 				try {
 					peli = tmdb.getFilmInfoId(aux, 0);

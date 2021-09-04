@@ -107,7 +107,7 @@ public class TMdbApi {
 			resultado.append(linea);
 		}
 		
-		rd.close();
+		rd.close(); 
 		
 		return resultado.toString();
 	}
@@ -126,35 +126,51 @@ public class TMdbApi {
 			nuevaPelicula.setRelease_date(infoPelicula.getString("release_date"));
 			nuevaPelicula.setAdult(infoPelicula.getBoolean("adult"));
 			
-			JSONArray arrayGenresMovie = infoPelicula.getJSONArray("genre_ids");
 			
-			try {
+			if(infoPelicula.has("genre_ids")){
+				JSONArray arrayGenresMovie = infoPelicula.getJSONArray("genre_ids");
+			
+				try {
 				
-				JSONObject objGenresArray = new JSONObject(this.getFilmInfo("genre/movie/list", 0));
+					JSONObject objGenresArray = new JSONObject(this.getFilmInfo("genre/movie/list", 0));
 				
-				JSONArray arrayGenresApi = objGenresArray.getJSONArray("genres");
+					JSONArray arrayGenresApi = objGenresArray.getJSONArray("genres");
+				
+					ArrayList<String> generos = new ArrayList<String>();
+				
+					for(int i=0; i<arrayGenresApi.length(); i++) { 
+					
+						for(int j=0; j<arrayGenresMovie.length(); j++) {
+					
+							JSONObject objGeneroApi = arrayGenresApi.getJSONObject(i);
+					
+							if(arrayGenresMovie.getInt(j) == objGeneroApi.getInt("id")) {
+							
+								String nombreGenero = objGeneroApi.getString("name");
+								generos.add(nombreGenero);
+							}
+						}
+					}
+				
+					nuevaPelicula.setGenres(generos);
+				
+				} catch (Exception e) {
+					e.getMessage();
+					e.printStackTrace();
+				}
+			}else if(infoPelicula.has("genres")){
+				JSONArray arrayGenresMovie = infoPelicula.getJSONArray("genres");
 				
 				ArrayList<String> generos = new ArrayList<String>();
 				
-				for(int i=0; i<arrayGenresApi.length(); i++) {
+				for(int i=0; i<arrayGenresMovie.length(); i++){
 					
-					for(int j=0; j<arrayGenresMovie.length(); j++) {
-					
-						JSONObject objGeneroApi = arrayGenresApi.getJSONObject(i);
-					
-						if(arrayGenresMovie.getInt(j) == objGeneroApi.getInt("id")) {
-							
-							String nombreGenero = objGeneroApi.getString("name");
-							generos.add(nombreGenero);
-						}
-					}
+					JSONObject objGenero = arrayGenresMovie.getJSONObject(i);
+					String nombreGenero = objGenero.getString("name");
+					generos.add(nombreGenero);
 				}
 				
 				nuevaPelicula.setGenres(generos);
-				
-			} catch (Exception e) {
-				e.getMessage();
-				e.printStackTrace();
 			}
 			
 		} catch (JSONException e) {
@@ -193,8 +209,6 @@ public class TMdbApi {
 		}
 		
 		rd.close();
-		
-		System.out.println("Resultado: " + resultado);
 		
 		nuevaPelicula = this.getFilm(new JSONObject(resultado.toString()));
 		

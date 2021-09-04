@@ -44,7 +44,7 @@ public class IGdbApi {
 			String tokenTypeCap = tokenType.replace(tokenType.charAt(0), tokenType.toUpperCase().charAt(0));
 			
 			this.setAuthorization(tokenTypeCap + " " + jobj.getString("access_token"));
-			
+			 
 		} catch (Exception e) {
 			e.getMessage();
 			e.printStackTrace();
@@ -290,8 +290,6 @@ public class IGdbApi {
 		}
 		
 		rd.close();
-		
-		System.out.println("Resultado: " + resultado);
 		
 		nuevoJuego = this.getVideoGame(resultado.toString());
 		
