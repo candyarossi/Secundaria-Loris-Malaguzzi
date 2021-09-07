@@ -68,9 +68,20 @@ print("Lista anterior ordenada:")
 MostrarLista(lista)
 local nuevo = 4
 
+-- V1 - No sabemos si está ordenada 
 function InsertarElementoYOrdenar(lista, nuevo)
     table.insert(lista, nuevo)
     table.sort(lista)
+end
+
+-- V2 - Asumimos que está ordenada
+function InsertarElementoYOrdenar(lista, nuevo)
+    for i=1, #lista, 1 do
+        if nuevo < lista[i] then 
+            table.insert(lista, i, nuevo)
+            break
+        end
+    end
 end
 
 InsertarElementoYOrdenar(lista, nuevo)
