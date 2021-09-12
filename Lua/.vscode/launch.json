@@ -6,7 +6,7 @@
             "type": "lua",
             "request": "launch",
             "stopOnEntry": true,
-            "program": "${workspaceFolder}/src/ejercicios/tpe2.lua",
+            "program": "${workspaceFolder}/src/ejercicios/main.lua",
             "console": "externalTerminal",
             "outputCapture": []
         }

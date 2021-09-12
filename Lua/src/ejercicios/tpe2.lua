@@ -33,9 +33,9 @@ MostrarLista(lista)
 
 local lista2 = {}
 
-function PasarDeUnaListaAOtra(lista1, lista2)
-    for i=1, #lista1, 1 do
-        table.insert(lista2, lista1[i])
+function PasarDeUnaListaAOtra(lista, lista2)
+    for i=1, #lista, 1 do
+        table.insert(lista2, lista[i])
     end
 end
 
@@ -48,6 +48,7 @@ MostrarLista(lista2)
 --3.	Hacer una función que encuentre el menor elemento de una lista 
 --      y lo retorne.
 
+-- Versión 1
 function DevolverMenorDeUnaLista(lista)
     local menor = lista[1]
     for i=1, #lista, 1 do
@@ -58,6 +59,19 @@ function DevolverMenorDeUnaLista(lista)
     return menor
 end
 
+-- Versión 2
+function DevolverMenorDeUnaLista(lista)
+    table.sort(lista)
+    local menor = lista[1]
+    return menor
+end
+
+-- Versión 2.1
+function DevolverMenorDeUnaLista(lista)
+    table.sort(lista)
+    return lista[1]
+end
+
 print("Menor elemento de la lista: ", DevolverMenorDeUnaLista(lista))
 
 --4.	Hacer una función que inserte en una lista ordenada un nuevo elemento, 
@@ -66,15 +80,16 @@ print("Menor elemento de la lista: ", DevolverMenorDeUnaLista(lista))
 table.sort(lista)
 print("Lista anterior ordenada:")
 MostrarLista(lista)
-local nuevo = 4
+print("Ingrese un nuevo numero: ")
+local nuevo = io.read("*n")
 
--- V1 - No sabemos si está ordenada 
+-- Versión 1 - No sabemos si la lista está ordenada 
 function InsertarElementoYOrdenar(lista, nuevo)
     table.insert(lista, nuevo)
     table.sort(lista)
 end
 
--- V2 - Asumimos que está ordenada
+-- Versión 2 - Asumimos que la lista está ordenada
 function InsertarElementoYOrdenar(lista, nuevo)
     for i=1, #lista, 1 do
         if nuevo < lista[i] then 
@@ -106,20 +121,20 @@ print("Suma de todos los elementos de la lista: ", SumarElementosDeUnaLista(list
 --      para ello se puede usar la función del punto 5 y agregar la división por 
 --      la cantidad de elementos de la lista.
 
--- V1
+-- Versión 1
 function PromedioDeLosElementosDeUnaLista(lista)
     local suma = SumarElementosDeUnaLista(lista)
     local promedio = suma / #lista
     return promedio
 end
 
--- V2
+-- Versión 1.1
 function PromedioDeLosElementosDeUnaLista(lista)
     local promedio = SumarElementosDeUnaLista(lista) / #lista
     return promedio
 end
 
--- V3
+-- Versión 1.2
 function PromedioDeLosElementosDeUnaLista(lista)
     return SumarElementosDeUnaLista(lista) / #lista
 end
@@ -134,13 +149,13 @@ print("Promedio de todos los elementos de la lista: ", PromedioDeLosElementosDeU
 
 local listaDada = {1,5,9,3,6,8}
 
--- V1
+-- Versión 1
 function TransformarListaANumeroDecimal(lista)
     local nro = table.concat(lista, "")
     return nro
 end
 
--- V2
+-- Versión 1.1
 function TransformarListaANumeroDecimal(lista)
     return table.concat(lista, "")
 end
