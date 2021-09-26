@@ -34,13 +34,19 @@ function love.load()
     love.window.setMode(WINDOW_WIDTH, WINDOW_HEIGHT, {
         fullscreen = false,
         resizable = false,
-        vsync = true
+        vsync = true            -- VSync o Vertical Sync, que en castellano sería 
+                                -- "sincronización vertical", es una tecnología gráfica 
+                                -- diseñada para los videojuegos. Lo que hace esta 
+                                -- tecnología detectar cuáles son los fotogramas por segundo 
+                                -- (FPS) a los que se está moviendo el juego y la tasa de 
+                                -- refresco de tu monitor, y los sincroniza para evitar 
+                                -- problemas como el "screen tearing".
     })
 end
 
 --[[
-    love.draw() Llamado después de la actualización (update) por LÖVE2D, se usa para 
-    dibujar cualquier cosa en la pantalla, actualizado o no
+    love.draw() Llamado después de la actualización/refresco (update) por LÖVE2D, se usa 
+    para dibujar cualquier cosa en la pantalla, actualizado o no
 ]]
 function love.draw()
     love.graphics.printf(

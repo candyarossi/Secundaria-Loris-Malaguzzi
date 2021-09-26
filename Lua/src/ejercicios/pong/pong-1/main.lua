@@ -1,28 +1,31 @@
 --[[
-    GD50 2018
-    Pong Remake
+    PONG - TP Final: Lenguaje Lua & Love2d - 6to año - Instituto Loris Malaguzzi
+    Traducción: Candela Yarossi
+    candyarossi@gmail.com
 
-    pong-1
-    "The Low-Res Update"
+    -- PONG 1 - La Actualización de Baja Resolución --
 
-    -- Main Program --
+    Fuente Original: GD50 2020 - Pong remake
+    Autor: Colton Ogden
+    cogden@cs50.harvard.edu 
 
-    Author: Colton Ogden
-    cogden@cs50.harvard.edu
 
-    Originally programmed by Atari in 1972. Features two
-    paddles, controlled by players, with the goal of getting
-    the ball past your opponent's edge. First to 10 points wins.
+    -- Programa principal --
 
-    This version is built to more closely resemble the NES than
-    the original Pong machines or the Atari 2600 in terms of
-    resolution, though in widescreen (16:9) so it looks nicer on 
-    modern systems.
+    Programado originalmente por Atari en 1972. Cuenta con dos
+    paletas, controladas por dos jugadores, con el objetivo de conseguir
+    llevar la pelota más allá del límite de su oponente. El primero en 
+    conseguir 10 puntos gana
+
+    Esta versión está diseñada para parecerse más a la NES que a
+    las máquinas Pong originales o el Atari 2600 en términos de
+    resolución, aunque en pantalla ancha (16:9), por lo que se ve 
+    mejor en sistemas modernos
 ]]
 
--- push is a library that will allow us to draw our game at a virtual
--- resolution, instead of however large our window is; used to provide
--- a more retro aesthetic
+-- push es una biblioteca que nos permitirá renderizar nuestro juego en 
+-- una resolución virtual, en lugar de lo grande que sea nuestra ventana; 
+-- utilizado para proporcionar una estética más retro
 --
 -- https://github.com/Ulydev/push
 push = require 'push'
@@ -34,16 +37,18 @@ VIRTUAL_WIDTH = 432
 VIRTUAL_HEIGHT = 243
 
 --[[
-    Runs when the game first starts up, only once; used to initialize the game.
+    Se ejecuta cuando el juego se inicia por primera vez, solo una vez; 
+    utilizado para inicializar el juego
 ]]
 function love.load()
-    -- use nearest-neighbor filtering on upscaling and downscaling to prevent blurring of text 
-    -- and graphics; try removing this function to see the difference!
+    -- Utilizamos el filtro nearest-neighbor ("vecino más cercano") al 
+    -- aumentar y reducir la escala para evitar que el texto y los gráficos 
+    -- se vean borrosos; comenten esta función para ver la diferencia
     love.graphics.setDefaultFilter('nearest', 'nearest')
 
-    -- initialize our virtual resolution, which will be rendered within our
-    -- actual window no matter its dimensions; replaces our love.window.setMode call
-    -- from the last example
+    -- Inicializamos nuestra resolución virtual, que será renderizada dentro de nuestra 
+    -- ventana actual sin importar sus dimensiones; reemplaza nuestra llamada 
+    -- love.window.setMode de la entrega anterior
     push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
         fullscreen = false,
         resizable = false,
@@ -52,29 +57,32 @@ function love.load()
 end
 
 --[[
-    Keyboard handling, called by LÖVE2D each frame; 
-    passes in the key we pressed so we can access.
+    Keyboard handling (Manejo del teclado), llamado por LÖVE2D en cada cuadro (frame)*;
+    pasa por parámetro la tecla que presionamos para que podamos acceder a alguna 
+    función o acción en específico
 ]]
 function love.keypressed(key)
-    -- keys can be accessed by string name
+    -- Las teclas son accesibles mediante su nombre
     if key == 'escape' then
-        -- function LÖVE gives us to terminate application
+        -- Esta función permite finalizar la aplicación
         love.event.quit()
     end
 end
 
 --[[
-    Called after update by LÖVE2D, used to draw anything to the screen, 
-    updated or otherwise.
+    love.draw() Llamado después de la actualización/refresco (update) por LÖVE2D, se usa 
+    para dibujar cualquier cosa en la pantalla, actualizado o no
 ]]
 function love.draw()
-    -- begin rendering at virtual resolution
+    -- Comienzo del render de la resolución virtual
     push:apply('start')
 
-    -- condensed onto one line from last example
-    -- note we are now using virtual width and height now for text placement
+    -- El mismo printf de la entrega anterior pero en una sola línea
+    -- Ahora estamos usando ancho y alto virtuales para la colocación del texto
     love.graphics.printf('Hello Pong!', 0, VIRTUAL_HEIGHT / 2 - 6, VIRTUAL_WIDTH, 'center')
 
-    -- end rendering at virtual resolution
+    -- Fin del render de la resolución virtual
     push:apply('end')
 end
+
+-- *FPS: Explicación en Youtube: https://youtu.be/7lUFluLOh-s

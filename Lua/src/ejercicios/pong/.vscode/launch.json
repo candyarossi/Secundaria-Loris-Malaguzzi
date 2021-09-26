@@ -6,7 +6,7 @@
             "type": "lua",
             "request": "launch",
             "stopOnEntry": true,
-            "program": "${workspaceFolder}/src/ejercicios/pong/pong-final/main.lua",
+            "program": "${workspaceFolder}/src/ejercicios/pong/pong-1/main.lua",
             "console": "externalTerminal",
             "outputCapture": []
         }
