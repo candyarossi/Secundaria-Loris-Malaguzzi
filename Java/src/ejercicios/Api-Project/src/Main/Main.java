@@ -13,15 +13,20 @@ public class Main {
 		
 		IssyApp app = new IssyApp();
 		
-		System.out.println("Seleccione una opción: \n1. Registrarse. \n2. Iniciar Sesión.");
+		System.out.println("Seleccione una opción: \n1. Registrarse. \n2. Iniciar Sesión. \n3. Salir.");
 		int op = scan.nextInt();
 		
-		if(op == 1) {
-			registrarse(scan, app);
-		}else if(op == 2) {
-			iniciarSesion(scan, app);
+		switch(op) {
+			case 1: 
+				registrarse(scan, app);
+				break;
+			case 2: 
+				iniciarSesion(scan, app);
+				break;
+			case 3:
+				break;
 		}
-	
+		
 		scan.close();
 
 	}
@@ -62,6 +67,9 @@ public class Main {
 		
 		if(usuario != null) {
 			sesionIniciada(scan, app, usuario);
+		}else {
+			String[] args = {};
+			main(args);
 		}
 	}
 	
@@ -69,7 +77,6 @@ public class Main {
 		
 		String rta = "";
 		
-		do {
 			System.out.println("Menú Principal: \n1. Acceder al Sistema Juegos. \n2. Acceder al Sistema Cine. \n3. Acceder al Sistema Canciones. \n4. Ver mis Favoritos. \n5. Salir.");
 			int op = scan.nextInt();
 			app.menu(op, usuario);
@@ -102,15 +109,12 @@ public class Main {
 						System.out.println("No se ha podido agregar el item. \n¿Desea volver al Menú principal? Si / No");
 						rta = scan.nextLine();
 					}
+				}else {
+					sesionIniciada(scan, app, usuario);
 				}
-			}else if(op == 5){ 
-				break;
-			}else{
-				System.out.println("¿Desea volver al Menú principal? Si / No");
-				scan.nextLine();
-				rta = scan.nextLine();
+			}else if(op == 4) {
+				sesionIniciada(scan, app, usuario);
 			}
-		}while (rta.equalsIgnoreCase("SI"));
 		
 	}
 	
