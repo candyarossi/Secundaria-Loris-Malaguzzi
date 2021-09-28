@@ -56,11 +56,11 @@ public class IssyApp {
 			userLog = usuarios.obtener(pos);
 			
 			if(!pass.equals(userLog.getPassword())) {
-				System.out.println("Contraseña Incorrecta.");
+				System.out.println("\nContraseña Incorrecta.");
 				userLog = null;
 			}
 		}else {
-			System.out.println("El usuario no existe.");
+			System.out.println("\nEl usuario no existe.");
 			userLog = null;
 		}
 		
